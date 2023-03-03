@@ -52,8 +52,30 @@ def _find_remaining_time(seconds, time_elapsed):
     return minutes_left, seconds_left
 
 
-# Enter time for alarm to run
-minutes = int(input("Enter Minutes: "))
-seconds = int(input("Enter Seconds: "))
+def get_time():
+    """
+    Get time values from user
+
+    Returns:
+        minutes int: minutes value of time
+        seconds int: seconds value of time
+    """
+    minutes, seconds = None, None
+    while True:
+        try:
+            if minutes == None:
+                minutes = int(input("Enter Minutes: "))
+            if seconds == None:
+                seconds = int(input("Enter Seconds: "))
+            break
+        except ValueError:
+            print("Please Enter integer Value")
+            continue
+
+    return minutes, seconds
+
+
+minutes, seconds = get_time()
 total_seconds = (minutes * 60) + seconds
+
 alarm(total_seconds)
