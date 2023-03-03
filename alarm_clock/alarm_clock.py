@@ -23,15 +23,33 @@ def alarm(seconds):
         time.sleep(1)
         time_elapsed += 1
 
-        # Find Remaining time
-        time_left = seconds - time_elapsed
-        minutes_left = time_left // 60
-        second_left = time_left % 60
+        minutes_left, seconds_left = _find_remaining_time(
+            seconds, time_elapsed)
 
         # Print the remaining time on first line of terminal
-        print(f"{CLEAR_AND_RETURN}{minutes_left:02d}:{second_left:02d}")
+        print(f"{CLEAR_AND_RETURN}"
+              f"{minutes_left:02d}:{seconds_left:02d}")
 
     playsound("alarm_clock/alarm_sound.mp3")
+
+
+def _find_remaining_time(seconds, time_elapsed):
+    """
+    Find Remaining time to show
+
+    Args:
+        seconds (int): How much seconds needs to pass for playing the alarm
+        time_elapsed (int): The passing time
+
+    Returns:
+        minutes_left int: Remaining Minutes
+        seconds_left int: Remaining Seconds
+    """
+    time_left = seconds - time_elapsed
+    minutes_left = time_left // 60
+    seconds_left = time_left % 60
+
+    return minutes_left, seconds_left
 
 
 # Enter time for alarm to run
